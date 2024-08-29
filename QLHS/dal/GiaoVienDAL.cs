@@ -30,6 +30,35 @@ namespace QLHS.dal
             return dt;
         }
 
+        public DataTable searchTeacher(String ma_mh, String ho_ten)
+        {
+            String query = "";
+            if (ma_mh.Equals("all"))
+            {
+                query = "SELECT ma_gv, ho_ten, gioi_tinh, ngay_sinh, dia_chi, email, ten_mon_hoc FROM giaovien inner join monhoc on giaovien.ma_mh = monhoc.ma_mh " +
+                    "where ho_ten like '" + ho_ten + "%';";
+            }
+            else
+            {
+                query = "SELECT ma_gv, ho_ten, gioi_tinh, ngay_sinh, dia_chi, email, ten_mon_hoc FROM giaovien inner join monhoc on giaovien.ma_mh = monhoc.ma_mh " +
+                    "where ho_ten like '" + ho_ten + "%' and monhoc.ma_mh like '" + ma_mh +"';";
+            }
+            
+            conn.Open();
+            da = new SqlDataAdapter(query, conn);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ma_gv", typeof(String));
+            dt.Columns.Add("ho_ten", typeof(String));
+            dt.Columns.Add("gioi_tinh", typeof(bool));
+            dt.Columns.Add("ngay_sinh", typeof(String));
+            dt.Columns.Add("dia_chi", typeof(String));
+            dt.Columns.Add("email", typeof(String));
+            dt.Columns.Add("ten_mon_hoc", typeof(String));
+            da.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
         public bool AddGiaoVien(GiaoVien giaoVien)
         {
             String query = "INSERT INTO giaovien (ma_gv, ho_ten, gioi_tinh, ngay_sinh, dia_chi, email, ma_mh) " +
@@ -38,6 +67,7 @@ namespace QLHS.dal
             {
                 conn.Open();
                 cmd = new SqlCommand(query, conn);
+                
                 cmd.Parameters.Add("@ma_gv", SqlDbType.VarChar).Value = giaoVien.getMaGV();
                 cmd.Parameters.Add("@ho_ten", SqlDbType.NVarChar).Value = giaoVien.getHo_ten();
                 cmd.Parameters.Add("@gioi_tinh", SqlDbType.Bit).Value = giaoVien.getGioi_tinh();
@@ -82,14 +112,14 @@ namespace QLHS.dal
             return true;
         }
 
-        public bool deleteTeacher(int id)
+        public bool deleteTeacher(String id)
         {
             String query = "DELETE from giaovien where ma_gv = @id";
             try
             {
                 conn.Open();
                 cmd = new SqlCommand(query, conn);
-                cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }

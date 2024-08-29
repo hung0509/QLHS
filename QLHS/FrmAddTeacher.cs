@@ -15,9 +15,9 @@ using QLHS.Model;
 
 namespace QLHS
 {
-    public partial class FormThemGiaoVien : Form
+    public partial class FrmAddTeacher : Form
     {
-        public FormThemGiaoVien()
+        public FrmAddTeacher()
         {
             InitializeComponent();
         }
@@ -32,14 +32,14 @@ namespace QLHS
         {
             bool isCheck = true;
 
-            if(txtMaGV.Text == null || txtMaGV.Text.Equals(""))
+            if (txtMaGV.Text == null || txtMaGV.Text.Equals(""))
             {
                 isCheck = false;
                 label16.Visible = true;
             }
             else
             {
-                label16.Visible=false;
+                label16.Visible = false;
             }
 
             if (txtNameTeacher.Text == null || txtNameTeacher.Text.Equals(""))
@@ -52,7 +52,7 @@ namespace QLHS
                 label13.Visible = false;
             }
 
-            if(txtuser.Text == null || txtuser.Text.Equals(""))
+            if (txtuser.Text == null || txtuser.Text.Equals(""))
             {
                 isCheck |= false;
                 label11.Text = "*Tên đăng nhập đang bị bỏ trống*";
@@ -71,7 +71,7 @@ namespace QLHS
                 }
             }
 
-            if(txtpass.Text == null || txtpass.Text.Equals(""))
+            if (txtpass.Text == null || txtpass.Text.Equals(""))
             {
                 isCheck = false;
                 label12.Text = "*Mật khẩu đang bị bỏ trống*";
@@ -93,16 +93,16 @@ namespace QLHS
                 label14.Visible = false;
             }
 
-            if(txtpass.Text != txtrepass.Text && txtpass.Text != null && !txtpass.Text.Equals(""))
+            if (txtpass.Text != txtrepass.Text && txtpass.Text != null && !txtpass.Text.Equals(""))
             {
-                
+
                 isCheck = false;
                 label12.Text = "*Mật khẩu không khớp với mật khẩu xác nhận*";
                 label14.Text = "*Mật khẩu không khớp với mật khẩu xác nhận*";
                 label12.Visible = true;
                 label14.Visible = true;
             }
-            else if(txtpass.Text == txtrepass.Text && txtpass.Text != null && !txtpass.Text.Equals(""))
+            else if (txtpass.Text == txtrepass.Text && txtpass.Text != null && !txtpass.Text.Equals(""))
             {
                 label13.Visible = false;
                 label14.Visible = false;
@@ -206,10 +206,11 @@ namespace QLHS
                     {
                         MessageBox.Show("Đăng ký thành công 1 giáo viên");
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
 
-                }  
+                }
             }
         }
 
@@ -226,7 +227,7 @@ namespace QLHS
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            if(FrmDangNhap.loai_tai_khoan == 0)
+            if (FrmDangNhap.loai_tai_khoan == 0)
             {
                 Form1 f = new Form1();
                 f.ShowDialog();
@@ -238,4 +239,5 @@ namespace QLHS
             }
         }
     }
+
 }

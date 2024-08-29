@@ -67,11 +67,11 @@
     <Compile Include="FormGiaoVien.Designer.cs">
       <DependentUpon>FormGiaoVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormThemGiaoVien.cs">
+    <Compile Include="FrmAddTeacher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormThemGiaoVien.Designer.cs">
-      <DependentUpon>FormThemGiaoVien.cs</DependentUpon>
+    <Compile Include="FrmAddTeacher.Designer.cs">
+      <DependentUpon>FrmAddTeacher.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmDangNhap.cs">
       <SubType>Form</SubType>
@@ -96,8 +96,8 @@
     <EmbeddedResource Include="FormGiaoVien.resx">
       <DependentUpon>FormGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormThemGiaoVien.resx">
-      <DependentUpon>FormThemGiaoVien.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAddTeacher.resx">
+      <DependentUpon>FrmAddTeacher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDangNhap.resx">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>

@@ -10,7 +10,6 @@ namespace QLHS.Model
     {
         private int id_hk;
         private String name_hk;
-
         public HocKy(int id_hk, string name_hk)
         {
             this.id_hk = id_hk;

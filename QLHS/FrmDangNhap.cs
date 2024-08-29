@@ -14,8 +14,9 @@ namespace QLHS
 {
     public partial class FrmDangNhap : Form
     { 
-        public bool isConnect = false;
+        public static bool isConnect = false;
         public static String ho_ten = "";
+        public static int loai_tai_khoan = -1;
         public FrmDangNhap()
         {
             InitializeComponent();
@@ -48,6 +49,7 @@ namespace QLHS
                 {
                     isConnect = true;
                     ho_ten = taiKhoan.getGiaoVien().getHo_ten();
+                    loai_tai_khoan = taiKhoan.getLoaiTaiKhoan();
                     if(MessageBox.Show("Bạn đã đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK) == DialogResult.OK)
                     {
                         if(taiKhoan.getLoaiTaiKhoan() == 0)
@@ -63,13 +65,14 @@ namespace QLHS
                             f.ShowDialog();
                         }
                     }
-                    else
-                    {
+                }
+                else
+                {
                         label7.Visible = true;
                         label6.Visible = true;
                         label7.Text = "*Tài khoản hoặc tên đăng nhập sai!*";
                         label6.Text = "*Tài khoản hoặc tên đăng nhập sai!*";
-                    }
+
                 }
             }
           

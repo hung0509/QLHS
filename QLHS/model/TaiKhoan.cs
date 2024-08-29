@@ -24,6 +24,14 @@ namespace QLHS.Model
             this.loai_tai_khoan = loai_tai_khoan;
             this.giao_vien = giao_vien;
         }
+        public TaiKhoan(string ten_dang_nhap, string mat_khau, byte loai_tai_khoan, GiaoVien giao_vien)
+        {
+            this.id_tk = id_tk;
+            this.ten_dang_nhap = ten_dang_nhap;
+            this.mat_khau = mat_khau;
+            this.loai_tai_khoan = loai_tai_khoan;
+            this.giao_vien = giao_vien;
+        }
 
         public int getId_tk() {
             return this.id_tk;

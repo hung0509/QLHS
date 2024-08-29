@@ -1,6 +1,6 @@
 ﻿namespace QLHS
 {
-    partial class FormThemGiaoVien
+    partial class FrmAddTeacher
     {
         /// <summary>
         /// Required designer variable.

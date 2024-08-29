@@ -15,6 +15,49 @@ namespace QLHS.dal
         private SqlDataAdapter da;
         private SqlCommand cmd;
 
+        public DataTable searchStudent(String ho_ten, int id_lop)
+        {
+            String query = "";
+            if (id_lop > 0)
+            {
+                    query = "SELECT id_hs, ho_ten, gioi_tinh, ngay_sinh, dia_chi, ten_lop " +
+                       "FROM hocsinh inner join lop on hocsinh.id_lop = lop.id_lop" +
+                       " where ho_ten like '" + ho_ten + "%' and lop.id_lop = " + id_lop;
+            }
+            else
+            {
+                query = "SELECT id_hs, ho_ten, gioi_tinh, ngay_sinh, dia_chi, ten_lop " +
+                      "FROM hocsinh inner join lop on hocsinh.id_lop = lop.id_lop where ho_ten like '" + ho_ten + "%'";
+            }
+            //B2 Mở kết nối
+            conn.Open();
+            //B3 Tạo cầu kết nối giữa DataSet và SQL để truy xuất(Đơn giản là tạo cầu nối)
+            da = new SqlDataAdapter(query, conn);
+            //B4 Đổ dữ liệu vào DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id_hs", typeof(int));
+            dt.Columns.Add("ho_ten", typeof(String));
+            dt.Columns.Add("gioi_tinh", typeof(bool));
+            dt.Columns.Add("ngay_sinh", typeof(String));
+            dt.Columns.Add("dia_chi", typeof(String));
+            dt.Columns.Add("ten_lop", typeof(String));
+            da.Fill(dt);
+            //B5 Đóng kết nối
+            conn.Close();
+            return dt;
+        }
+
+        public int getStudentNew()
+        {
+            int id = -1;
+            String query = "SELECT top 1 id_hs FROM hocsinh order by id_hs desc";
+            conn.Open();
+            cmd = new SqlCommand(query, conn);
+            id  = Convert.ToInt32(cmd.ExecuteScalar());
+            conn.Close();
+
+            return id;
+        }
         public DataTable getStudentInClass(int id_lop) {
             //B1 Tạo câu lệnh truy vấn
             String query = "";
@@ -54,7 +97,7 @@ namespace QLHS.dal
             try
             {
                 conn.Open();
-                cmd = new SqlCommand(query, conn);
+                cmd = new SqlCommand(query, conn);   
                 cmd.Parameters.Add("@ho_ten", SqlDbType.NVarChar).Value = hocSinh.getHo_ten();
                 cmd.Parameters.Add("@gioi_tinh", SqlDbType.Bit).Value = hocSinh.getGioi_tinh();
                 cmd.Parameters.Add("@ngay_sinh", SqlDbType.DateTime).Value = hocSinh.getNgay_sinh();
@@ -65,7 +108,7 @@ namespace QLHS.dal
             }
             catch(SqlException ex)
             {
-                MessageBox.Show("Lỗi!!");
+                MessageBox.Show(ex.ToString());
                 return false;
             }
             return true;
